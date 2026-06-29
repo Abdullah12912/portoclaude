@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Fonts */
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+
+  /* Brand Colors */
+  --color-bg: #0A0A0A;
+  --color-surface: #111111;
+  --color-surface2: #181818;
+  --color-text: #F0EDE6;
+  --color-muted: #888580;
+  --color-faint: #333330;
+  --color-gold: #C8A97E;
+  --color-gold-dim: #8C7454;
+  --color-teal: #1D9E75;
+  --color-teal-dim: #0F6E56;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection */
+::selection {
+  background: rgba(200, 169, 126, 0.2);
+  color: var(--color-text);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-faint); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-muted); }
+
+/* Prose / MDX styles */
+.prose {
+  color: var(--color-text);
+  max-width: 680px;
+}
+.prose h1, .prose h2, .prose h3 {
+  color: var(--color-text);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.prose p { color: #B8B5AE; line-height: 1.75; }
+.prose a { color: var(--color-gold); text-underline-offset: 3px; }
+.prose code {
+  font-family: var(--font-mono);
+  background: var(--color-surface2);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.875em;
+}
+.prose pre {
+  background: var(--color-surface);
+  border: 1px solid var(--color-faint);
+  border-radius: 6px;
+  padding: 1.25rem;
+  overflow-x: auto;
+}
+.prose blockquote {
+  border-left: 2px solid var(--color-gold-dim);
+  padding-left: 1.25rem;
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+/* Gallery — album detail mobile */
+@media (max-width: 768px) {
+  .album-detail-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .album-caption-box {
+    position: static !important;
+    order: 2;
+    margin-top: 4px;
+  }
+  .album-foto-grid {
+    order: 1;
+  }
+  .album-narasi-box {
+    order: 3;
+  }
+}

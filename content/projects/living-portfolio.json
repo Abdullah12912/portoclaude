@@ -1,0 +1,10 @@
+{
+  "title": "Living Portfolio",
+  "description": "Website yang tumbuh bersama pemiliknya — digital garden, OS pribadi, dan portofolio dalam satu sistem.",
+  "status": "active",
+  "progress": 35,
+  "github": "https://github.com/rifqiabdullah/portfolio",
+  "website": "",
+  "tech": ["Next.js 15", "TypeScript", "Tailwind CSS", "MDX", "Keystatic"],
+  "date": "2026-06-01"
+}
