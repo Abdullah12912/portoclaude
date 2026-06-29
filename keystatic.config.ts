@@ -2,7 +2,11 @@ import { config, fields, collection, singleton } from "@keystatic/core";
 
 export default config({
   storage: {
-    kind: "local",
+    kind: "github",
+    repo: {
+      owner: "Abdullah12912",
+      name: "portoclaude",
+    },
   },
 
   ui: {
@@ -28,6 +32,65 @@ export default config({
   },
 
   collections: {
+    albums: collection({
+      label: "Gallery — Albums",
+      slugField: "title",
+      path: "content/albums/*",
+      format: { data: "json" },
+      schema: {
+        title: fields.slug({ name: { label: "Judul Album" } }),
+        category: fields.select({
+          label: "Kategori",
+          options: [
+            { label: "Pesantren", value: "Pesantren" },
+            { label: "Kampus", value: "Kampus" },
+            { label: "Documentary", value: "Documentary" },
+            { label: "Street", value: "Street" },
+            { label: "Portrait", value: "Portrait" },
+          ],
+          defaultValue: "Documentary",
+        }),
+        location: fields.text({ label: "Lokasi", description: "Contoh: Yogyakarta" }),
+        date: fields.text({ label: "Tanggal", description: "Contoh: Juni 2026" }),
+        coverAspect: fields.select({
+          label: "Rasio Cover",
+          options: [
+            { label: "Wide (16:9) — album featured", value: "wide" },
+            { label: "Normal (4:3)", value: "normal" },
+          ],
+          defaultValue: "normal",
+        }),
+        narasi: fields.text({ label: "Narasi Album", multiline: true }),
+        photos: fields.array(
+          fields.object({
+            id: fields.text({ label: "ID Foto", description: "Contoh: 01, 02, 03" }),
+            src: fields.image({
+              label: "File Foto",
+              directory: "public/photos",
+              publicPath: "/photos",
+            }),
+            alt: fields.text({ label: "Alt Text" }),
+            caption: fields.text({ label: "Caption", multiline: true }),
+            place: fields.text({ label: "Lokasi Foto (opsional)" }),
+            date: fields.text({ label: "Tanggal Foto (opsional)" }),
+            aspectRatio: fields.select({
+              label: "Rasio Foto",
+              options: [
+                { label: "Landscape (4:3)", value: "landscape" },
+                { label: "Portrait (3:4)", value: "portrait" },
+                { label: "Wide (16:9)", value: "wide" },
+              ],
+              defaultValue: "landscape",
+            }),
+          }),
+          {
+            label: "Foto",
+            itemLabel: (props) => props.fields.alt.value || "Foto",
+          }
+        ),
+      },
+    }),
+
     notes: collection({
       label: "Notes",
       slugField: "title",
